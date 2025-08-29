@@ -1,6 +1,7 @@
 from .base_page import BasePage
 from selenium import webdriver
 from .locators import LoginPageLocators, MainPageLocators
+from selenium.webdriver.common.by import By
 
 
 class LoginPage(BasePage):
@@ -11,9 +12,10 @@ class LoginPage(BasePage):
         self.should_be_register_form()
 
     def go_to_login_page(self):
-        link = self.browser.find_element(*MainPageLocators.LOGIN_LINK)
+        link = self.browser.find_element(By.CSS_SELECTOR, "#login_link")
         link.click()
-        return LoginPage(browser=self.browser, url=self.browser.current_url)
+        alert = self.browser.switch_to.alert
+        alert.accept()
 
     def should_be_login_url(self):
         current = self.browser.current_url
