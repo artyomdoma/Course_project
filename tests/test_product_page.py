@@ -1,7 +1,10 @@
 import pytest
 from pages.product_page import ProductPage
-from pages.locators import ProductPageLocators
+from pages.base_page import BasePage
+from pages.basket_page import BasketPage
 import time
+
+
 
 PRODUCT_URL = "https://selenium1py.pythonanywhere.com/ru/catalogue/coders-at-work_207/"
 
@@ -45,3 +48,12 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
     page.open()
     page.add_to_cart()
     page.success_message_should_disappear(timeout=4)
+
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    page = ProductPage(browser, PRODUCT_URL)
+    page.open()
+    page.open_cart_link()
+    basket_page = BasketPage(browser, PRODUCT_URL)
+    basket_page.is_not_element_present_in_cart()
+    basket_page.empty_basket_message()
+

@@ -1,5 +1,5 @@
 from .base_page import BasePage
-from .locators import ProductPageLocators
+from .locators import ProductPageLocators, BasePageLocators
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import TimeoutException
@@ -7,9 +7,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-
 class ProductPage(BasePage):
-
     def add_to_cart(self):
         self.browser.find_element(*ProductPageLocators.ADD_TO_CART).click()
 
@@ -32,3 +30,4 @@ class ProductPage(BasePage):
     def success_message_should_disappear(self, timeout=4):
         assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE, timeout=timeout), \
             "Success message did not disappear"
+

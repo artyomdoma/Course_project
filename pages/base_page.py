@@ -61,3 +61,6 @@ class BasePage:
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
+
+    def open_cart_link(self): \
+        self.browser.find_element(*BasePageLocators.CART_LINK).click()
